@@ -58,12 +58,12 @@ playwright-api-framework/
 │
 ├── tests/                       # Test specifications
 │   ├── los/
-│   │   ├── login.spec.ts           # Serial login tests (Steps 1-3)
-│   │   ├── login-negative.spec.ts  # Parallel negative tests
+│   │   ├── login.spec.ts           # Serial login tests (Steps 1-3) - @LoginTests
+│   │   ├── login-negative.spec.ts  # Parallel negative tests - @LoginTests
 │   │   └── los.spec.ts             # Other LOS tests
 │   ├── lms/
-│   ├── properties/             # Property-based tests
-│   └── unit/                   # Unit tests
+│   ├── properties/             # Property-based tests - @FrameworkCheckTests
+│   └── unit/                   # Unit tests - @FrameworkCheckTests
 │
 ├── types/                       # TypeScript type definitions
 │   ├── api.types.ts
@@ -404,7 +404,9 @@ npm run clean                   # Remove all reports and logs
 ```bash
 # Run by tag
 npx playwright test --grep @LoginTests          # API login tests (5 tests)
-npx playwright test --grep @FrameworkCheckTests # Framework validation (8 files, 60+ tests)
+npx playwright test --grep @FrameworkCheckTests # Framework validation (145 tests)
+#   - tests/properties/ (8 files, 63 property tests)
+#   - tests/unit/ (5 files, 82 unit tests)
 ```
 
 ### View Logs

@@ -39,7 +39,7 @@ class TestHelper extends BaseHelper {
   }
 }
 
-test.describe('BaseHelper - buildUrl', () => {
+test.describe('BaseHelper - buildUrl', { tag: '@FrameworkCheckTests' }, () => {
   let testHelper: TestHelper;
 
   test.beforeAll(async ({ request }) => {
@@ -97,7 +97,7 @@ test.describe('BaseHelper - buildUrl', () => {
   });
 });
 
-test.describe('BaseHelper - buildHeaders', () => {
+test.describe('BaseHelper - buildHeaders', { tag: '@FrameworkCheckTests' }, () => {
   let testHelper: TestHelper;
 
   test.beforeAll(async ({ request }) => {
@@ -165,7 +165,7 @@ test.describe('BaseHelper - buildHeaders', () => {
   });
 });
 
-test.describe('BaseHelper - replacePathParams', () => {
+test.describe('BaseHelper - replacePathParams', { tag: '@FrameworkCheckTests' }, () => {
   let testHelper: TestHelper;
 
   test.beforeAll(async ({ request }) => {
@@ -229,7 +229,7 @@ test.describe('BaseHelper - replacePathParams', () => {
   });
 });
 
-test.describe('BaseHelper - auth token management', () => {
+test.describe('BaseHelper - auth token management', { tag: '@FrameworkCheckTests' }, () => {
   let testHelper: TestHelper;
 
   test.beforeAll(async ({ request }) => {
@@ -266,7 +266,7 @@ test.describe('BaseHelper - auth token management', () => {
   });
 });
 
-test.describe('BaseHelper - parseResponse', () => {
+test.describe('BaseHelper - parseResponse', { tag: '@FrameworkCheckTests' }, () => {
   let testHelper: TestHelper;
 
   test.beforeAll(async ({ request }) => {

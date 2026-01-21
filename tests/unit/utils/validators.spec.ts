@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { ResponseValidator } from '../../../utils/validators';
 import { ApiResponse } from '../../../types/api.types';
 
-test.describe('ResponseValidator', () => {
+test.describe('ResponseValidator', { tag: '@FrameworkCheckTests' }, () => {
   test.describe('validateStatus', () => {
     test('should not throw when status matches expected', () => {
       const response: ApiResponse = {

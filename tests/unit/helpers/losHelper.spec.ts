@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { LOSHelper } from '../../../helpers/los/losHelper';
 
-test.describe('LOSHelper Authentication', () => {
+test.describe('LOSHelper Authentication', { tag: '@FrameworkCheckTests' }, () => {
   test('should throw descriptive error when login fails with 401', async ({ request }) => {
     const losHelper = new LOSHelper(request);
     

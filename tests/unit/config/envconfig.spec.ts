@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { getBaseUrl, envConfig } from '../../../config/envconfig';
 
-test.describe('Environment Configuration', () => {
+test.describe('Environment Configuration', { tag: '@FrameworkCheckTests' }, () => {
   test('should return dev base URL when no environment is specified', () => {
     // Save original env
     const originalEnv = process.env.TEST_ENV;
