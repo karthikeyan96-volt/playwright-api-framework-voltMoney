@@ -1,0 +1,16 @@
+{
+  "los": {
+    "userid": "your_los_userid",
+    "email": "your_los_email@example.com",
+    "password": "your_los_password",
+    "authToken": "",
+    "phoneNo": "+91XXXXXXXXXX",
+    "otp": "XXXXXX"
+  },
+  "lms": {
+    "userid": "your_lms_userid",
+    "email": "your_lms_email@example.com",
+    "password": "your_lms_password",
+    "authToken": ""
+  }
+}

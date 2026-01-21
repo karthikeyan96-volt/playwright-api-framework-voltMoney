@@ -1,0 +1,24 @@
+{
+  "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "X-Client-Id": "lms-test-client"
+  },
+  "config": {
+    "timeout": 30000,
+    "retries": 2,
+    "defaultWaitTime": 1000
+  },
+  "payloads": {
+    "validPayment": {
+      "accountId": "ACC-12345",
+      "amount": 1500.00,
+      "paymentDate": "2024-01-15",
+      "paymentMethod": "ACH"
+    },
+    "accountUpdate": {
+      "status": "active",
+      "contactEmail": "updated@example.com"
+    }
+  }
+}

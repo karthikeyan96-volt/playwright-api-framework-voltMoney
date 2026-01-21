@@ -1,0 +1,35 @@
+{
+  "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8",
+    "Origin": "https://app.staging.voltmoney.in",
+    "Referer": "https://app.staging.voltmoney.in/",
+    "User-Agent": "Mozilla/5.0 (Linux; Android 13; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36",
+    "x-appmode": "INVESTOR_VIEW",
+    "x-appplatform": "VOLT_WEB_APP",
+    "x-deviceid": "",
+    "x-devicetype": "MobileWeb",
+    "x-entitytype": "BORROWER"
+  },
+  "config": {
+    "timeout": 30000,
+    "retries": 2,
+    "defaultWaitTime": 1000
+  },
+  "payloads": {
+    "validLoan": {
+      "borrowerName": "John Doe",
+      "loanAmount": 250000,
+      "loanType": "conventional",
+      "term": 30,
+      "interestRate": 3.5
+    },
+    "validApplication": {
+      "applicantName": "Jane Smith",
+      "ssn": "123-45-6789",
+      "income": 75000,
+      "employmentStatus": "employed"
+    }
+  }
+}

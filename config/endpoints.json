@@ -1,0 +1,37 @@
+{
+  "los": {
+    "auth": {
+      "requestOtp": "/api/client/auth/requestOtp/v2/{phoneNo}",
+      "verifyOtp": "/api/client/auth/verifyOtp/",
+      "getUserData": "/app/borrower/user",
+      "logout": "/api/client/auth/logout"
+    },
+    "loans": {
+      "create": "/api/los/loans",
+      "getById": "/api/los/loans/{id}",
+      "update": "/api/los/loans/{id}",
+      "delete": "/api/los/loans/{id}",
+      "list": "/api/los/loans"
+    },
+    "applications": {
+      "create": "/api/los/applications",
+      "getById": "/api/los/applications/{id}",
+      "submit": "/api/los/applications/{id}/submit"
+    }
+  },
+  "lms": {
+    "auth": {
+      "login": "/api/lms/auth/login",
+      "logout": "/api/lms/auth/logout"
+    },
+    "payments": {
+      "create": "/api/lms/payments",
+      "getById": "/api/lms/payments/{id}",
+      "list": "/api/lms/payments"
+    },
+    "accounts": {
+      "getById": "/api/lms/accounts/{id}",
+      "update": "/api/lms/accounts/{id}"
+    }
+  }
+}
