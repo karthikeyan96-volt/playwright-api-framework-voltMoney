@@ -17,9 +17,8 @@ A scalable, maintainable API automation framework built with Playwright and Type
 ## Overview
 
 This framework is designed to test multi-pod architecture systems with clean separation of concerns. It currently supports:
-- **LOS (Loan Origination System)** - Loan and application management
-- **LMS (Loan Management System)** - Payment and account management
-
+- **LOS (Loan Origination System)** 
+- **LMS (Loan Management System)** 
 The framework emphasizes:
 - **Scalability**: Easy addition of new pods without modifying existing code
 - **Maintainability**: Clear separation of concerns with dedicated directories
