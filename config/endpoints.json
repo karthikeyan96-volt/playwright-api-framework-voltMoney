@@ -17,6 +17,13 @@
       "create": "/api/los/applications",
       "getById": "/api/los/applications/{id}",
       "submit": "/api/los/applications/{id}/submit"
+    },
+    "loanAccountCreation": {
+      "generateOffer": "/los/api/v1/generate/offer",
+      "clientDedupeCheck": "/lms/api/client/dedupe/v1",
+      "createOpportunity": "/los/api/v1/opportunity",
+      "kycUtilityInit": "/los/api/v1/utility/kyc/init",
+      "getKycUtility": "/los/api/v1/utility/kyc/{utilityReferenceId}"
     }
   },
   "lms": {

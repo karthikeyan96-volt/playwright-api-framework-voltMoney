@@ -1,0 +1,86 @@
+{
+  "userDetails": {
+    "automationMockUser": {
+      "pan": "EVIPM1670K",
+      "phone": "9000000013"
+    },
+    "testUserOne": {
+      "pan": "EIWPK5700B",
+      "phone": "8344422975"
+    }
+  },
+  "common": {
+    "sourcingChannelCode": "DSP-UAT",
+    "redirectionUrl": "https://www.voltmoney.in"
+  },
+  "generateOffer": {
+    "request": {
+      "productShortName": "LAS",
+      "assets": [
+        {
+          "isin": "INF178L01020",
+          "folioNumber": "12345",
+          "assetUnits": 4499.999000
+        },
+        {
+          "isin": "INF277K01Z51",
+          "folioNumber": "12345434",
+          "assetUnits": 4499.999000
+        },
+        {
+          "isin": "INF209K01587",
+          "folioNumber": "12345434",
+          "assetUnits": 4499.999000
+        }
+      ]
+    },
+    "expectedResponse": {
+      "statusCode": 200,
+      "requiredFields": ["dedupeResponse", "assets", "totalAssetValue", "totalAssetLtv", "feeConfig", "interestConfig", "tenureConfig"]
+    }
+  },
+  "clientDedupeCheck": {
+    "request": {
+      "productShortName": "LAS"
+    },
+    "expectedResponse": {
+      "statusCode": 200,
+      "isDuplicate": false,
+      "message": "Client is not duplicate",
+      "requiredFields": ["isDuplicate", "message", "availableAssetCategories"],
+      "availableAssetCategories": ["MUTUAL_FUNDS"]
+    }
+  },
+  "createOpportunity": {
+    "request": {
+      "product": "LAS",
+      "opportunityType": "LOAN_CREATION"
+    },
+    "expectedResponse": {
+      "statusCode": 200,
+      "requiredFields": ["opportunityId", "status", "pan", "phoneNumber", "product"]
+    }
+  },
+  "kycUtilityInit": {
+    "request": {
+      "redirectionUrl": "https://www.voltmoney.in"
+    },
+    "expectedResponse": {
+      "statusCode": 200,
+      "status": "IN_PROGRESS",
+      "subStatus": "VALIDATION_PENDING",
+      "requiredFields": ["opportunityId", "utilityReferenceId", "status", "subStatus", "data", "verifierData", "webUrl"]
+    }
+  },
+  "getKycUtility": {
+    "request": {
+      "imageType": "base64"
+    },
+    "expectedResponse": {
+      "statusCode": 200,
+      "status": "IN_PROGRESS",
+      "subStatus": "VALIDATION_PENDING",
+      "requiredFields": ["opportunityId", "utilityReferenceId", "status", "subStatus", "data", "verifierData", "webUrl"]
+    }
+  }
+}

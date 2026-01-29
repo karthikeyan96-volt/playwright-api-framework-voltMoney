@@ -8,7 +8,7 @@
  */
 
 import { APIRequestContext } from '@playwright/test';
-import { getBaseUrl } from '../../config/envconfig';
+import { getBaseUrl, getDspBaseUrl } from '../../config/envconfig';
 import { Logger } from '../../utils/logger';
 import { ApiResponse } from '../../types/api.types';
 import { attachRequest, attachResponse, attachCurlCommand } from '../../utils/allureHelper';
@@ -236,4 +236,13 @@ export abstract class BaseHelper {
    * Requirements: 6.3 - Each helper class must provide a login method
    */
   abstract login(): Promise<void>;
+
+  /**
+   * Get DSP base URL for current environment
+   * 
+   * @returns DSP base URL for loan account creation APIs
+   */
+  protected getDspBaseUrl(): string {
+    return getDspBaseUrl();
+  }
 }
