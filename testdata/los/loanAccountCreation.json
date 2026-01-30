@@ -1,8 +1,8 @@
 {
   "userDetails": {
     "automationMockUser": {
-      "pan": "EVIPM1670K",
-      "phone": "9000000013"
+      "pan": "DGFPG2249H",
+      "phone": "7583042531"
     },
     "testUserOne": {
       "pan": "EIWPK5700B",
@@ -78,9 +78,232 @@
     },
     "expectedResponse": {
       "statusCode": 200,
-      "status": "IN_PROGRESS",
+      "status": "APPROVED",
       "subStatus": "VALIDATION_PENDING",
       "requiredFields": ["opportunityId", "utilityReferenceId", "status", "subStatus", "data", "verifierData", "webUrl"]
+    }
+  },
+  "initPhotoVerification": {
+    "request": {
+      "userImagePath": "testdata/los/base64Image.txt",
+      "customerConsent": {
+        "consentStatus": "APPROVED",
+        "ipAddress": "192.168.1.1",
+        "approvalTimestamp": "2025-03-17T14:47:30Z"
+      }
+    },
+    "expectedResponse": {
+      "statusCode": 200,
+      "status": "APPROVED",
+      "subStatus": "PHOTO_VERIFICATION_SUCCESS"
+    }
+  },
+  "getPhotoVerification": {
+    "request": {},
+    "expectedResponse": {
+      "statusCode": 200,
+      "status": "APPROVED",
+      "subStatus": "PHOTO_VERIFICATION_SUCCESS"
+    }
+  },
+  "saveAdditionalData": {
+    "request": {
+      "additionalData": {
+        "endUse": "PERSONAL",
+        "incomeRange": "ANNUAL_3_10_LAKHS",
+        "fathersFirstName": "Merugu",
+        "fathersMiddleName": "",
+        "fathersLastName": "Kishan",
+        "employmentStatus": "SALARIED",
+        "residentIndianStatus": true,
+        "currentAddressSameAsPermanent": true
+      },
+      "customerConsent": {
+        "consentStatus": "APPROVED",
+        "ipAddress": "192.168.1.1",
+        "approvalTimestamp": "2025-03-17T14:47:30Z"
+      }
+    },
+    "expectedResponse": {
+      "statusCode": 200,
+      "requiredFields": ["opportunityId", "status"]
+    }
+  },
+  "getAdditionalData": {
+    "request": {},
+    "expectedResponse": {
+      "statusCode": 200,
+      "status": "APPROVED",
+      "subStatus": "APPROVED"
+    }
+  },
+  "bankUtilityInit": {
+    "request": {
+      "bankAccountNumber": "388108022658",
+      "ifscCode": "ICIC0000009",
+      "bankName": "ICIC BANK",
+      "bankAccountType": "SAVINGS_ACCOUNT"
+    },
+    "expectedResponse": {
+      "statusCode": 200,
+      "status": "APPROVED",
+      "subStatus": "BANK_ACCOUNT_VERIFICATION_SUCCESSFUL"
+    }
+  },
+  "getBankUtility": {
+    "request": {},
+    "expectedResponse": {
+      "statusCode": 200,
+      "status": "APPROVED",
+      "subStatus": "BANK_ACCOUNT_VERIFICATION_SUCCESSFUL"
+    }
+  },
+  "createMandate": {
+    "request": {
+      "endDate": "2039-09-20",
+      "mandateType": "API_MANDATE",
+      "mandateAmount": "999980",
+      "redirectionUrl": "https://www.voltmoney.in"
+    },
+    "expectedResponse": {
+      "statusCode": 200,
+      "status": "IN_PROGRESS",
+      "subStatus": "IN_PROGRESS"
+    }
+  },
+  "getMandate": {
+    "request": {},
+    "expectedResponse": {
+      "statusCode": 200,
+      "status": "APPROVED",
+      "subStatus": "MANDATE_SUCCESS"
+    }
+  },
+  "createVerificationLogEmail": {
+    "request": {
+      "customerConsent": {
+        "approvalTimestamp": 1769678137000,
+        "consent": null,
+        "consentStatus": "APPROVED",
+        "ipAddress": "192.168.1.1"
+      },
+      "verificationMethod": "EMAIL",
+      "verificationRemarks": "Verification completed successfully",
+      "verificationStatus": "SUCCESS",
+      "verificationTimestamp": 1769678137000,
+      "verificationType": "EMAIL",
+      "verifiedValue": "testUser@voltmoney.in"
+    },
+    "expectedResponse": {
+      "statusCode": 200,
+      "status": "APPROVED"
+    }
+  },
+  "createVerificationLogMobile": {
+    "request": {
+      "customerConsent": {
+        "approvalTimestamp": 1769017239000,
+        "consent": null,
+        "consentStatus": "APPROVED",
+        "ipAddress": "192.168.1.1"
+      },
+      "verificationMethod": "OTP",
+      "verificationRemarks": "Verification completed successfully",
+      "verificationStatus": "SUCCESS",
+      "verificationTimestamp": 1769017239000,
+      "verificationType": "MOBILE",
+      "verifiedValue": "7583042531"
+    },
+    "expectedResponse": {
+      "statusCode": 200,
+      "status": "APPROVED"
+    }
+  },
+  "getVerificationLog": {
+    "request": {},
+    "expectedResponse": {
+      "statusCode": 200,
+      "status": "APPROVED"
+    }
+  },
+  "generateLoanContract": {
+    "request": {
+      "kfsRequest": {
+        "creditLimit": 100000.00,
+        "sanctionLimit": 20000000.00,
+        "interestRate": 10.49,
+        "tenure": 36,
+        "feeDetails": {
+          "processingFee": 1299.00,
+          "enhanceLimitFee": 499,
+          "renewalFee": 999.00,
+          "marginPledgeFee": 999.00
+        }
+      },
+      "redirectionUrl": "https://www.voltmoney.in"
+    },
+    "expectedResponse": {
+      "statusCode": 200,
+      "status": "IN_PROGRESS"
+    }
+  },
+  "approveKfs": {
+    "request": {
+      "productName": "LAS",
+      "creditLimit": 1234567.00,
+      "sanctionLimit": 20000000.00,
+      "interestRate": 10.49,
+      "tenure": 36,
+      "feeDetails": {
+        "processingFee": 1299.00,
+        "enhanceLimitFee": 499,
+        "renewalFee": 499.00,
+        "marginPledgeFee": 999.00
+      },
+      "lspRequestDetails": {
+        "lspDetails": {
+          "name": "CRED",
+          "address": "CRED Address"
+        },
+        "grievanceOfficer": {
+          "name": "Saksham",
+          "designation": "PM",
+          "address": "CRED Address",
+          "phoneNumber": "9414031689",
+          "emailID": "harshita@gmail.com"
+        }
+      },
+      "requester": "DSP-UAT"
+    },
+    "expectedResponse": {
+      "statusCode": 200
+    }
+  },
+  "kfsConsent": {
+    "request": {
+      "consentStatus": "APPROVED",
+      "ipAddress": "14.258.1.3"
+    },
+    "expectedResponse": {
+      "statusCode": 200
+    }
+  },
+  "approveAgreement": {
+    "request": {},
+    "expectedResponse": {
+      "statusCode": 200
+    }
+  },
+  "agreementConsent": {
+    "request": {},
+    "expectedResponse": {
+      "statusCode": 200
+    }
+  },
+  "submitOpportunity": {
+    "request": {},
+    "expectedResponse": {
+      "statusCode": 200
     }
   }
 }
