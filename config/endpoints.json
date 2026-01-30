@@ -23,7 +23,23 @@
       "clientDedupeCheck": "/lms/api/client/dedupe/v1",
       "createOpportunity": "/los/api/v1/opportunity",
       "kycUtilityInit": "/los/api/v1/utility/kyc/init",
-      "getKycUtility": "/los/api/v1/utility/kyc/{utilityReferenceId}"
+      "getKycUtility": "/los/api/v1/utility/kyc/{utilityReferenceId}",
+      "initPhotoVerification": "/los/api/v1/utility/photo/verification/init",
+      "getPhotoVerification": "/los/api/v1/utility/photo/verification/{utilityReferenceId}",
+      "saveAdditionalData": "/los/api/v1/utility/additional/data",
+      "getAdditionalData": "/los/api/v1/utility/additional/data/{utilityReferenceId}",
+      "bankUtilityInit": "/los/api/v1/utility/bank/verification/init",
+      "getBankUtility": "/los/api/v1/utility/bank/verification/{utilityReferenceId}",
+      "createMandate": "/los/api/v1/utility/mandate/init",
+      "getMandate": "/los/api/v1/utility/mandate/{utilityReferenceId}",
+      "createVerificationLogEmail": "/los/api/v1/utility/verification/log",
+      "getVerificationLog": "/los/api/v1/utility/verification/log/{utilityReferenceId}",
+      "generateLoanContract": "/los/api/v1/opportunity/{opportunityId}/loan/contract",
+      "approveKfs": "/los/api/v2/utility/kfs",
+      "kfsConsent": "/los/api/v2/utility/kfs/{kfsReferenceId}/consent",
+      "approveAgreement": "/los/api/v2/utility/agreement/init",
+      "agreementConsent": "/los/api/v2/utility/agreement/{agreementReferenceId}/customer/accept",
+      "submitOpportunity": "/los/api/v1/opportunity/{opportunityId}/submit"
     }
   },
   "lms": {

@@ -1,18 +1,8 @@
-/**
- * Base Helper Class
- * 
- * Abstract base class providing common functionality for all pod-specific helper classes.
- * Handles HTTP requests, authentication token management, URL building, and response parsing.
- * 
- * Requirements: 5.3, 5.5, 6.1, 6.2, 11.1, 11.2, 12.2
- */
-
 import { APIRequestContext } from '@playwright/test';
 import { getBaseUrl, getDspBaseUrl } from '../../config/envconfig';
 import { Logger } from '../../utils/logger';
 import { ApiResponse } from '../../types/api.types';
 import { attachRequest, attachResponse, attachCurlCommand } from '../../utils/allureHelper';
-
 /**
  * Abstract base helper class for pod-specific API helpers
  * 
@@ -29,19 +19,14 @@ import { attachRequest, attachResponse, attachCurlCommand } from '../../utils/al
 export abstract class BaseHelper {
   /** Playwright API request context for making HTTP requests */
   protected request: APIRequestContext;
-  
   /** Base URL for the current environment */
   protected baseUrl: string;
-  
   /** Authentication token for API requests */
   protected authToken: string = '';
-  
   /** Logger instance for this helper */
   protected logger: Logger;
-  
   /** Name of the pod this helper is for */
   protected podName: string;
-
   /**
    * Constructor for BaseHelper
    * 
@@ -54,7 +39,6 @@ export abstract class BaseHelper {
     this.baseUrl = getBaseUrl();
     this.logger = new Logger(podName);
   }
-
   /**
    * Make an HTTP request to the API
    * 
@@ -79,22 +63,17 @@ export abstract class BaseHelper {
   ): Promise<ApiResponse> {
     const url = this.buildUrl(endpoint, options.params);
     const headers = this.buildHeaders(options.headers);
-
     this.logger.info(`${method} ${url}`);
     if (options.data) {
       this.logger.debug('Request body:', options.data);
     }
-
     try {
-      // Attach request details to Allure
       attachRequest(method, url, headers, options.data);
       attachCurlCommand(method, url, headers, options.data);
-
       const response = await this.request[method.toLowerCase() as Lowercase<typeof method>](url, {
         data: options.data,
         headers: headers
       });
-
       const body = await this.parseResponse(response);
       const result: ApiResponse = {
         status: response.status(),
@@ -102,16 +81,11 @@ export abstract class BaseHelper {
         body: body,
         ok: response.ok()
       };
-
       this.logger.info(`Response status: ${result.status}`);
       this.logger.debug('Response body:', result.body);
-
-      // Attach response details to Allure
       attachResponse(result.status, result.headers, result.body);
-
       return result;
     } catch (error: any) {
-      // Comprehensive error logging as per Requirements 11.1, 11.2
       this.logger.error(`Request failed: ${method} ${url}`);
       this.logger.error(`Request headers:`, headers);
       if (options.data) {
@@ -121,7 +95,6 @@ export abstract class BaseHelper {
       throw error;
     }
   }
-
   /**
    * Build complete URL with query parameters
    * 
@@ -133,15 +106,12 @@ export abstract class BaseHelper {
    */
   protected buildUrl(endpoint: string, params?: Record<string, string>): string {
     let url = `${this.baseUrl}${endpoint}`;
-    
     if (params) {
       const queryString = new URLSearchParams(params).toString();
       url += `?${queryString}`;
     }
-    
     return url;
   }
-
   /**
    * Build request headers with authentication token injection
    * 
@@ -158,14 +128,11 @@ export abstract class BaseHelper {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     };
-
     if (this.authToken) {
       headers['Authorization'] = `Bearer ${this.authToken}`;
     }
-
     return { ...headers, ...additionalHeaders };
   }
-
   /**
    * Parse API response based on content type
    * 
@@ -178,14 +145,11 @@ export abstract class BaseHelper {
    */
   protected async parseResponse(response: any): Promise<any> {
     const contentType = response.headers()['content-type'] || '';
-    
     if (contentType.includes('application/json')) {
       return await response.json();
     }
-    
     return await response.text();
   }
-
   /**
    * Replace path parameters in endpoint URL
    * 
@@ -203,7 +167,6 @@ export abstract class BaseHelper {
     }
     return result;
   }
-
   /**
    * Set authentication token
    * 
@@ -217,7 +180,6 @@ export abstract class BaseHelper {
     this.authToken = token;
     this.logger.info('Auth token updated');
   }
-
   /**
    * Get current authentication token
    * 
@@ -226,7 +188,6 @@ export abstract class BaseHelper {
   public getAuthToken(): string {
     return this.authToken;
   }
-
   /**
    * Abstract login method
    * 
@@ -236,7 +197,6 @@ export abstract class BaseHelper {
    * Requirements: 6.3 - Each helper class must provide a login method
    */
   abstract login(): Promise<void>;
-
   /**
    * Get DSP base URL for current environment
    * 

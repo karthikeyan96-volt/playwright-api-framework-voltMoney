@@ -1,18 +1,10 @@
-/**
- * log4js Configuration
- * 
- * Configures logging for the entire framework with:
- * - Console appender for real-time monitoring
- * - Date-based file appenders for persistent logs
- * - Separate log files per pod (LOS, LMS)
- * - Error-only log file for quick error tracking
- */
+
 
 import { Configuration } from 'log4js';
 
 export const log4jsConfig: Configuration = {
   appenders: {
-    // Console appender - shows logs in terminal
+
     console: {
       type: 'console',
       layout: {
@@ -21,7 +13,7 @@ export const log4jsConfig: Configuration = {
       }
     },
     
-    // Date-based file appender for LOS logs
+
     losFile: {
       type: 'dateFile',
       filename: 'logs/los/los',
@@ -33,7 +25,7 @@ export const log4jsConfig: Configuration = {
       }
     },
     
-    // Date-based file appender for LMS logs
+
     lmsFile: {
       type: 'dateFile',
       filename: 'logs/lms/lms',
@@ -45,7 +37,7 @@ export const log4jsConfig: Configuration = {
       }
     },
     
-    // Date-based file appender for all logs
+
     allFile: {
       type: 'dateFile',
       filename: 'logs/all/all',
@@ -57,7 +49,7 @@ export const log4jsConfig: Configuration = {
       }
     },
     
-    // Error-only file appender
+
     errorFile: {
       type: 'dateFile',
       filename: 'logs/errors/error',
@@ -69,7 +61,7 @@ export const log4jsConfig: Configuration = {
       }
     },
     
-    // Filtered error appender
+
     errors: {
       type: 'logLevelFilter',
       appender: 'errorFile',
@@ -78,25 +70,25 @@ export const log4jsConfig: Configuration = {
   },
   
   categories: {
-    // Default category
+
     default: {
       appenders: ['console', 'allFile', 'errors'],
       level: 'info'
     },
     
-    // LOS category
+
     los: {
       appenders: ['console', 'losFile', 'allFile', 'errors'],
       level: 'debug'
     },
     
-    // LMS category
+
     lms: {
       appenders: ['console', 'lmsFile', 'allFile', 'errors'],
       level: 'debug'
     },
     
-    // Test category
+
     test: {
       appenders: ['console', 'allFile', 'errors'],
       level: 'info'

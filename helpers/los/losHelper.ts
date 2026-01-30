@@ -1,18 +1,8 @@
-/**
- * LOS Helper Class
- * 
- * Helper class for LOS (Loan Origination System) API operations.
- * Handles authentication and all LOS-specific API calls.
- * 
- * Requirements: 5.1, 5.2, 5.4, 6.3
- */
-
 import { APIRequestContext } from '@playwright/test';
 import { BaseHelper } from '../base/baseHelper';
 import endpoints from '../../config/endpoints.json';
 import creds from '../../config/creds.json';
 import { LoginResponse, ApiResponse } from '../../types/api.types';
-
 /**
  * LOS Helper class for Loan Origination System API operations
  * 
@@ -30,7 +20,6 @@ export class LOSHelper extends BaseHelper {
   constructor(request: APIRequestContext) {
     super(request, 'los');
   }
-
   /**
    * Login to LOS API using 3-step OTP flow
    * 
@@ -47,7 +36,6 @@ export class LOSHelper extends BaseHelper {
    */
   async login(): Promise<void> {
     const credentials = creds.los;
-    
     // Hardcoded custom headers for Volt Money API
     const customHeaders = {
       'Accept': 'application/json, text/plain, */*',
@@ -61,7 +49,6 @@ export class LOSHelper extends BaseHelper {
       'x-devicetype': 'MobileWeb',
       'x-entitytype': 'BORROWER'
     };
-    
     try {
       // Step 1: Request OTP (GET)
       this.logger.info('Step 1: Requesting OTP...');
@@ -69,21 +56,16 @@ export class LOSHelper extends BaseHelper {
         endpoints.los.auth.requestOtp, 
         { phoneNo: credentials.phoneNo }
       );
-      
       const otpResponse = await this.makeRequest('GET', `${requestOtpEndpoint}?enableWhatsapp=true`, {
         headers: customHeaders
       });
-      
       if (!otpResponse.ok) {
         throw new Error(`Request OTP failed: ${otpResponse.status} - ${JSON.stringify(otpResponse.body)}`);
       }
-      
       this.logger.info('OTP requested successfully');
-      
       // Step 2: Verify OTP and get JWT token (POST)
       this.logger.info('Step 2: Verifying OTP...');
       const verifyOtpEndpoint = endpoints.los.auth.verifyOtp;
-      
       const verifyResponse = await this.makeRequest('POST', verifyOtpEndpoint, {
         data: {
           otp: credentials.otp,
@@ -91,44 +73,35 @@ export class LOSHelper extends BaseHelper {
         },
         headers: customHeaders
       });
-      
       if (!verifyResponse.ok) {
         throw new Error(`Verify OTP failed: ${verifyResponse.status} - ${JSON.stringify(verifyResponse.body)}`);
       }
-      
       // Extract JWT token from response
       const jwtToken = verifyResponse.body.jwt;
       if (!jwtToken) {
         throw new Error('JWT token not found in verify OTP response');
       }
-      
       this.setAuthToken(jwtToken);
       this.logger.info('OTP verified successfully, JWT token received');
-      
       // Step 3: Fetch user data (POST)
       this.logger.info('Step 3: Fetching user data...');
       const getUserDataEndpoint = endpoints.los.auth.getUserData;
-      
       const userDataResponse = await this.makeRequest('POST', getUserDataEndpoint, {
         data: {
           onboardingPartnerCode: ""
         },
         headers: customHeaders
       });
-      
       if (!userDataResponse.ok) {
         throw new Error(`Fetch user data failed: ${userDataResponse.status} - ${JSON.stringify(userDataResponse.body)}`);
       }
-      
       this.logger.info('LOS login successful - User data fetched');
       this.logger.debug('User data:', userDataResponse.body);
-      
     } catch (error: any) {
       this.logger.error('LOS login failed:', error.message);
       throw error;
     }
   }
-
   /**
    * Create a new loan
    * 
@@ -139,7 +112,6 @@ export class LOSHelper extends BaseHelper {
     const endpoint = endpoints.los.loans.create;
     return await this.makeRequest('POST', endpoint, { data: loanData });
   }
-
   /**
    * Get loan by ID
    * 
@@ -150,7 +122,6 @@ export class LOSHelper extends BaseHelper {
     const endpoint = this.replacePathParams(endpoints.los.loans.getById, { id: loanId });
     return await this.makeRequest('GET', endpoint);
   }
-
   /**
    * Update an existing loan
    * 
@@ -162,7 +133,6 @@ export class LOSHelper extends BaseHelper {
     const endpoint = this.replacePathParams(endpoints.los.loans.update, { id: loanId });
     return await this.makeRequest('PUT', endpoint, { data: loanData });
   }
-
   /**
    * Delete a loan
    * 
@@ -173,7 +143,6 @@ export class LOSHelper extends BaseHelper {
     const endpoint = this.replacePathParams(endpoints.los.loans.delete, { id: loanId });
     return await this.makeRequest('DELETE', endpoint);
   }
-
   /**
    * List all loans with optional query parameters
    * 
@@ -184,7 +153,6 @@ export class LOSHelper extends BaseHelper {
     const endpoint = endpoints.los.loans.list;
     return await this.makeRequest('GET', endpoint, { params });
   }
-
   /**
    * Create a new loan application
    * 
@@ -195,7 +163,6 @@ export class LOSHelper extends BaseHelper {
     const endpoint = endpoints.los.applications.create;
     return await this.makeRequest('POST', endpoint, { data: applicationData });
   }
-
   /**
    * Get application by ID
    * 
@@ -206,7 +173,6 @@ export class LOSHelper extends BaseHelper {
     const endpoint = this.replacePathParams(endpoints.los.applications.getById, { id: applicationId });
     return await this.makeRequest('GET', endpoint);
   }
-
   /**
    * Submit an application
    * 
@@ -217,7 +183,6 @@ export class LOSHelper extends BaseHelper {
     const endpoint = this.replacePathParams(endpoints.los.applications.submit, { id: applicationId });
     return await this.makeRequest('POST', endpoint);
   }
-
   /**
    * Logout from LOS API
    * 
@@ -229,7 +194,6 @@ export class LOSHelper extends BaseHelper {
     this.setAuthToken('');
     this.logger.info('LOS logout successful');
   }
-
   /**
    * Request OTP for phone number (GET method)
    * 
@@ -251,7 +215,6 @@ export class LOSHelper extends BaseHelper {
         'x-devicetype': 'MobileWeb',
         'x-entitytype': 'BORROWER'
       };
-      
       const endpoint = this.replacePathParams(endpoints.los.auth.requestOtp, { phoneNo });
       return await this.makeRequest('GET', `${endpoint}?enableWhatsapp=${enableWhatsapp}`, {
         headers: customHeaders
@@ -261,7 +224,6 @@ export class LOSHelper extends BaseHelper {
       throw error;
     }
   }
-
   /**
    * Verify OTP and get JWT token (POST method)
    * 
@@ -284,7 +246,6 @@ export class LOSHelper extends BaseHelper {
         'x-devicetype': 'MobileWeb',
         'x-entitytype': 'BORROWER'
       };
-      
       const endpoint = endpoints.los.auth.verifyOtp;
       return await this.makeRequest('POST', endpoint, {
         data: {
@@ -298,7 +259,6 @@ export class LOSHelper extends BaseHelper {
       throw error;
     }
   }
-
   /**
    * Get user data after authentication (POST method)
    * 
@@ -320,7 +280,6 @@ export class LOSHelper extends BaseHelper {
         'x-devicetype': 'MobileWeb',
         'x-entitytype': 'BORROWER'
       };
-      
       const endpoint = endpoints.los.auth.getUserData;
       return await this.makeRequest('POST', endpoint, {
         data: {
